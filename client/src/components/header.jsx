@@ -28,16 +28,25 @@ const Header = () => {
         <div className='min-h-[50px] bg-white flex items-center'>
             <Link to="/" className='text-[#67e8f9] ml-3'>PostPedia</Link>
             <div className='w-full'></div>
-            <ul className='mr-3 hover:text-gray-400 hover:underline'>
+            <ul className='flex justify-between space-x-10 mr-3 '>
                 {user === null && 
                     <Link to="signup">
                         SIGNUP
                     </Link>
                 }
                 {user !== null && 
-                    <button onClick={logOut}>
-                        LOGOUT
-                    </button>
+                    <li className='hover:text-gray-400 '>
+                        <Link>
+                            PROFILE
+                        </Link>
+                    </li>
+                }
+                {user !== null && 
+                    <li className='hover:text-gray-400 '>
+                        <button onClick={logOut}>
+                            LOGOUT
+                        </button>
+                    </li>
                 }
             </ul>
         </div>
