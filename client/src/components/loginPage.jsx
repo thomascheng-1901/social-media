@@ -1,8 +1,12 @@
 import {React, useState, useRef} from 'react'
+import {useDispatch} from "react-redux"
+import {setLogin} from "../state/index.jsx"
 
 const LoginPage = () => {
 
     const form = useRef();
+
+    const dispatch = useDispatch();
 
     const [errorMessage, setErrorMessage] = useState("");
  
@@ -22,8 +26,14 @@ const LoginPage = () => {
             if ("msg" in loggedIn){
                 setErrorMessage(loggedIn["msg"])
             } else {
-                console.log("log in successful");
+                // log in successful
                 navigate("/");
+                dispatch(
+                    setLogin({
+                        user: loggedIn.user,
+                        token: loggedIn.token
+                    })
+                )
             }
         } else {
             consol

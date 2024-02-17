@@ -2,6 +2,8 @@ import {React, useRef, useState, useEffect} from 'react'
 import {useNavigate, Navigate} from "react-router-dom"
 import {duplicateUserOnSignUp} from "./constants.jsx"
 import {Link} from "react-router-dom"
+import {useDispatch} from "react-redux"
+import {setLogin} from "../state/index.jsx"
 
 const SignUpPage = () => {
 
@@ -34,6 +36,12 @@ const SignUpPage = () => {
             const savedUser = await savedUserResponse.json();
             if (!("error" in savedUser)){
                 navigate("/");
+                dispatch(
+                    setLogin({
+                        user: loggedIn.user,
+                        token: loggedIn.token
+                    })
+                )
             } else {
                 if (savedUser["error"].includes(duplicateUserOnSignUp)){
                     setErrorMessage("Account already registered");
