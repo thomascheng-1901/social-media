@@ -1,8 +1,11 @@
 import {React, useState, useRef} from 'react'
-import {useDispatch} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import {setLogin} from "../state/index.jsx"
+import {useNavigate, Navigate} from "react-router-dom"
 
 const LoginPage = () => {
+
+    const navigate = useNavigate();
 
     const form = useRef();
 
@@ -36,10 +39,9 @@ const LoginPage = () => {
                 )
             }
         } else {
-            consol
             // setErrorMessage("Something wrong has occured, please try again later");
         }
-        console.log("loginn : " + JSON.stringify(loggedIn));
+        console.log("login : " + JSON.stringify(loggedIn));
     }
 
     return (
