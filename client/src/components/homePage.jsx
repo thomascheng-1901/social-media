@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaLocationDot } from "react-icons/fa6";
 import { MdWork } from "react-icons/md";
+import Avatar from "../assets/images/avatar1.jpg"
+import PostImage from "../assets/images/blog1.jpg"
+import CommentSection from "./commentSection.jsx"
 
 const HomePage = () => {
 
@@ -61,14 +64,27 @@ const HomePage = () => {
                 <button className='rounded-2xl bg-gray-400/50 px-4 py-1'>POST</button>
             </div>
           }
-      <div className='w-[60%] space-y-5 mt-20'>
+      <div className='w-[60%] space-y-5 mt-20 '>
         {
             posts.map((post) => 
-                <div key={post.id} className='bg-white'>
-                    {post.firstName}
+                <div key={post.id} className='bg-white p-2 space-y-3'>
+                    <div className='flex space-x-2'>
+                        <img className='max-w-[2.5rem] rounded-lg' src={Avatar} alt="profileImage" />
+                        <div className=''>
+                            <div className='flex space-x-2'>
+                                <h1 className=''>{post.firstName}</h1>
+                                <h1 className=''>{post.lastName}</h1>
+                            </div>
+                            <h2 className='text-gray-400/50 text-sm'>{post.createdAt.split("T")[0]}</h2>
+                        </div>
+                    </div>
+                    <p className=''>{post.description}</p>
+                    <img className='rounded-lg' src={PostImage} alt="postImage" />
+                    <CommentSection comments ={post.comments}></CommentSection>
                 </div>
             )
         }
+              <div className='h-[10px]'></div>
       </div>
     </div>
   );
