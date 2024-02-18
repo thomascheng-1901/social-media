@@ -9,9 +9,11 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    let user;
+    let user = null;
     try {
         user = useSelector((state) => state.user);
+        console.log("user from header: ");
+        console.log(user);
     } catch (e){
         console.log("error from redux: " + e);
     }
@@ -25,8 +27,8 @@ const Header = () => {
     }
 
     return (
-        <div className='min-h-[50px] bg-white flex items-center'>
-            <Link to="/" className='text-[#67e8f9] ml-3'>PostPedia</Link>
+        <div className='sticky top-0 min-h-[50px] bg-white flex items-center'>
+            <Link to="/" className='text-[#67e8f9] ml-3'>PostYourPosts</Link>
             <div className='w-full'></div>
             <ul className='flex justify-between space-x-10 mr-3 '>
                 {user === null && 

@@ -37,6 +37,9 @@ const LoginPage = () => {
                         token: loggedIn.token
                     })
                 )
+                console.log("After login: ");
+                console.log(loggedIn.user);
+                console.log(loggedIn.token);
             }
         } else {
             // setErrorMessage("Something wrong has occured, please try again later");
