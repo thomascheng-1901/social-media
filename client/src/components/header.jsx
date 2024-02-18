@@ -27,7 +27,7 @@ const Header = () => {
     }
 
     return (
-        <div className='sticky top-0 min-h-[50px] bg-white flex items-center'>
+        <div className='fixed w-full min-h-[50px] bg-white flex items-center'>
             <Link to="/" className='text-[#67e8f9] ml-3'>PostYourPosts</Link>
             <div className='w-full'></div>
             <ul className='flex justify-between space-x-10 mr-3 '>
@@ -35,13 +35,6 @@ const Header = () => {
                     <Link to="signup">
                         SIGNUP
                     </Link>
-                }
-                {user !== null && 
-                    <li className='hover:text-gray-400 '>
-                        <Link>
-                            PROFILE
-                        </Link>
-                    </li>
                 }
                 {user !== null && 
                     <li className='hover:text-gray-400 '>

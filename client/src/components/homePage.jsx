@@ -14,8 +14,6 @@ const HomePage = () => {
     try {
 
     user = useSelector((state) => state.user);
-        console.log("id from redux:");
-        console.log(user);
     } catch (e){
         console.log("error from redux: " + e);
     }
@@ -52,14 +50,26 @@ const HomePage = () => {
   };
 
   return (
-    <div className='flex justify-evenly h-screen'>
-      {user !== null && <div className='w-[30%] h-[50%] bg-white sticky top-[60px] text-black text-center space-y-5 px-2'>
-        <Link>{user.firstName} {user.lastName}</Link>
-        <div><FaLocationDot/>{user.location}</div>
-        <div><MdWork />{user.occupation}</div>
-        <textarea className='bg-gray-400/50 w-full h-[50%] resize-none px-1 py-1' name="" id="" placeholder='Create a post'></textarea>
-      </div>}
-      <div className='w-[60%] bg-red-500'>yo</div>
+    <div className=' flex justify-evenly h-screen'>
+          {
+            user !== null && 
+            <div className='w-[30%] h-[50%] bg-white text-black text-center space-y-4 px-2 mt-20'>
+                <Link>{user.firstName} {user.lastName}</Link>
+                <div><FaLocationDot/>{user.location}</div>
+                <div><MdWork />{user.occupation}</div>
+                <textarea className='bg-gray-400/50 w-full h-[40%] resize-none px-1 py-1' name="" id="" placeholder='Create a post'></textarea>
+                <button className='rounded-2xl bg-gray-400/50 px-4 py-1'>POST</button>
+            </div>
+          }
+      <div className='w-[60%] space-y-5 mt-20'>
+        {
+            posts.map((post) => 
+                <div key={post.id} className='bg-white'>
+                    {post.firstName}
+                </div>
+            )
+        }
+      </div>
     </div>
   );
 };
