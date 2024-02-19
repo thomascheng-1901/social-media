@@ -10,6 +10,7 @@ const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const profileToFind = useSelector((state) => state.profileToFind);
+  console.log("profileToFind = " + profileToFind);
 
   useLayoutEffect(() => {
     getUserProfile(profileToFind);
@@ -23,6 +24,8 @@ const ProfilePage = () => {
       });
       const userData = await response.json();
       setUser(userData);
+      console.log("Fetch user profile: ");
+      console.log(user);
     } catch (e) {
       console.log('Fetch profile error: ' + e);
     }

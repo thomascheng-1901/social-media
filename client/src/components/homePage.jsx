@@ -51,7 +51,6 @@ const HomePage = () => {
         createdAt: post.createdAt,
         updatedAt: post.updatedAt,
       }));
-      console.log(result);
       setPosts(result);
     } catch (e) {
       console.log('Fetch posts error: ' + e);
@@ -61,13 +60,13 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const searchProfile = (id) => {
+    console.log("Search profile: " + id);
     if (stop.current) return console.log("stop navigate");
     dispatch(
         setProfileToFind({
             id: id
         })
-        )
-    console.log("user id: " + id);
+    )
     navigate(`profile/${id}`)
   }
 
@@ -90,10 +89,12 @@ const HomePage = () => {
                     <div className='flex space-x-2'>
                         <img className='max-w-[2.5rem] rounded-lg' src={Avatar} alt="profileImage" />
                         <div className=''>
-                            <div className='flex space-x-2'>
+                            <button onClick={()=>{stop.current = false; searchProfile(post.userId)}}>
+                              <div className='flex space-x-2'>
                                 <h1 className=''>{post.firstName}</h1>
                                 <h1 className=''>{post.lastName}</h1>
-                            </div>
+                              </div>
+                            </button>
                             <h2 className='text-gray-400/50 text-sm'>{post.createdAt.split("T")[0]}</h2>
                         </div>
                     </div>
