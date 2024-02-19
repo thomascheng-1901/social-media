@@ -4,7 +4,8 @@ const initialState = {
     mode: "light",
     user: null,
     token: null,
-    posts: []
+    posts: [],
+    profileToFind: null,
 };
 
 export const authSlice = createSlice({
@@ -38,9 +39,12 @@ export const authSlice = createSlice({
                 return post;
             });
             state.posts = updatedPosts;
+        },
+        setProfileToFind: (state, action) => {
+            state.profileToFind = action.payload.id;
         }
     }
 })
 
-export const {setMode, setLogin, setLogOut, setFriends, setPosts, setPost} = authSlice.actions;
+export const {setMode, setLogin, setLogOut, setFriends, setPosts, setPost, setProfileToFind} = authSlice.actions;
 export default authSlice.reducer;

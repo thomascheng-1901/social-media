@@ -1,13 +1,18 @@
-import React, { useLayoutEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useLayoutEffect, useState, useRef } from 'react';
+import { Link, useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaLocationDot } from "react-icons/fa6";
 import { MdWork } from "react-icons/md";
 import Avatar from "../assets/images/avatar1.jpg"
 import PostImage from "../assets/images/blog1.jpg"
 import CommentSection from "./commentSection.jsx"
+import {setProfileToFind} from "../state/index.jsx"
 
 const HomePage = () => {
+
+    const stop = useRef(true);
+
+    const dispatch = useDispatch();
 
     const [posts, setPosts] = useState([]);
 
@@ -16,7 +21,7 @@ const HomePage = () => {
     let user = null;
     try {
 
-    user = useSelector((state) => state.user);
+        user = useSelector((state) => state.user);
     } catch (e){
         console.log("error from redux: " + e);
     }
@@ -52,19 +57,33 @@ const HomePage = () => {
     }
   };
 
+  const navigate = useNavigate();
+
+
+  const searchProfile = (id) => {
+    if (stop.current) return console.log("stop navigate");
+    dispatch(
+        setProfileToFind({
+            id: id
+        })
+        )
+    console.log("user id: " + id);
+    navigate(`profile/${id}`)
+  }
+
   return (
     <div className=' flex justify-evenly h-screen'>
           {
             user !== null && 
-            <div className='w-[30%] h-[50%] bg-white text-black text-center space-y-4 px-2 mt-20'>
-                <Link>{user.firstName} {user.lastName}</Link>
+            <div className='w-[30%] h-[50%] bg-white text-black text-center space-y-4 px-2 mt-10'>
+                <button onClick={()=>{stop.current = false; searchProfile(user._id)}}>{user.firstName} {user.lastName}</button>
                 <div><FaLocationDot/>{user.location}</div>
                 <div><MdWork />{user.occupation}</div>
                 <textarea className='bg-gray-400/50 w-full h-[40%] resize-none px-1 py-1' name="" id="" placeholder='Create a post'></textarea>
                 <button className='rounded-2xl bg-gray-400/50 px-4 py-1'>POST</button>
             </div>
           }
-      <div className='w-[60%] space-y-5 mt-20 '>
+      <div className='w-[60%] space-y-5 mt-10 '>
         {
             posts.map((post) => 
                 <div key={post.id} className='bg-white p-2 space-y-3'>

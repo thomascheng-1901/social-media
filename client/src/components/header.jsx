@@ -27,7 +27,7 @@ const Header = () => {
     }
 
     return (
-        <div className='fixed w-full min-h-[50px] bg-white flex items-center'>
+        <div className='w-full min-h-[50px] bg-white flex items-center'>
             <Link to="/" className='text-[#67e8f9] ml-3'>PostYourPosts</Link>
             <div className='w-full'></div>
             <ul className='flex justify-between space-x-10 mr-3 '>

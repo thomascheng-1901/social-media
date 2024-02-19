@@ -7,6 +7,7 @@ import ErrorPage from "../src/components/errorPage.jsx"
 import HomePage from './components/homePage.jsx'
 import LoginPage from "./components/loginPage.jsx"
 import SignUpPage from './components/signUpPage.jsx'
+import ProfilePage from "./components/profilePage.jsx"
 
 import authReducer from "./state";
 import { configureStore } from "@reduxjs/toolkit";
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       {index: true, element: <HomePage/>},
       {path: "login", element: <LoginPage/>},
       {path: "signup", element: <SignUpPage/>},
+      {path: "profile/:id", element: <ProfilePage/>},
     ]
   }
 ])
