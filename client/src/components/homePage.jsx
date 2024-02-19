@@ -20,8 +20,9 @@ const HomePage = () => {
 
     let user = null;
     try {
-
         user = useSelector((state) => state.user);
+        console.log("redux result");
+        console.log(user);
     } catch (e){
         console.log("error from redux: " + e);
     }
@@ -59,7 +60,6 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
-
   const searchProfile = (id) => {
     if (stop.current) return console.log("stop navigate");
     dispatch(
@@ -75,10 +75,10 @@ const HomePage = () => {
     <div className=' flex justify-evenly h-screen'>
           {
             user !== null && 
-            <div className='w-[30%] h-[50%] bg-white text-black text-center space-y-4 px-2 mt-10'>
+            <div className='w-[30%] h-[60%] bg-white text-black text-center space-y-4 px-2 mt-10'>
                 <button onClick={()=>{stop.current = false; searchProfile(user._id)}}>{user.firstName} {user.lastName}</button>
-                <div><FaLocationDot/>{user.location}</div>
-                <div><MdWork />{user.occupation}</div>
+                <div className='flex items-center space-x-5'><FaLocationDot/><h1>{user.location}</h1></div>
+                <div className='flex items-center space-x-5'><MdWork /><h1>{user.occupation}</h1></div>
                 <textarea className='bg-gray-400/50 w-full h-[40%] resize-none px-1 py-1' name="" id="" placeholder='Create a post'></textarea>
                 <button className='rounded-2xl bg-gray-400/50 px-4 py-1'>POST</button>
             </div>
