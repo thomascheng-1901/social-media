@@ -25,8 +25,6 @@ const HomePage = () => {
     try {
         user = useSelector((state) => state.user);
         token = useSelector((state) => state.token);
-        console.log("redux result");
-        console.log(user);
     } catch (e){
         console.log("error from redux: " + e);
     }
@@ -41,7 +39,7 @@ const HomePage = () => {
         method: 'GET',
       });
       const posts = await postsResponse.json();
-      const result = posts.map((post) => ({
+      let result = posts.map((post) => ({
         id: post._id,
         userId: post.userId,
         firstName: post.firstName,
@@ -55,7 +53,16 @@ const HomePage = () => {
         createdAt: post.createdAt,
         updatedAt: post.updatedAt,
       }));
-      setPosts(result);
+      console.log(result.length);
+      let new_obj= []
+      let position = 0;
+      for (var i = result.length-1; i >= 0; --i){
+        new_obj[position] = result[i];
+        position += 1;
+      }
+      console.log(new_obj);
+      console.log(result);
+      setPosts(new_obj);
     } catch (e) {
       console.log('Fetch posts error: ' + e);
     }
@@ -98,6 +105,8 @@ const HomePage = () => {
     }
   }
 
+  let postPosition = 0;
+
   return (
     <div className=' flex justify-evenly h-screen'>
           {
@@ -115,7 +124,7 @@ const HomePage = () => {
       <div className='w-[60%] space-y-5 mt-10 '>
         {
             posts.map((post) => 
-                <div key={post.id} className='bg-white p-2 space-y-3'>
+               <div key={post.id} className='bg-white p-2 space-y-3'>
                     <div className='flex space-x-2'>
                         <img className='max-w-[2.5rem] rounded-lg' src={Avatar} alt="profileImage" />
                         <div className=''>
