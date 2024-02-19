@@ -38,7 +38,13 @@ const ProfilePage = () => {
         method: 'GET',
       });
       const posts = await response.json();
-      setPosts(posts);
+      let new_obj= []
+      let position = 0;
+      for (var i = posts.length-1; i >= 0; --i){
+        new_obj[position] = posts[i];
+        position += 1;
+      }
+      setPosts(new_obj);
       console.log("Fetch user posts: ");
       console.log(posts.length);
     } catch (e){
@@ -50,7 +56,7 @@ const ProfilePage = () => {
     <div className='flex justify-evenly h-screen'>
       {
         user && 
-        <div className='w-[30%] h-[20%] bg-white text-black text-center space-y-4 px-2 mt-10'>
+        <div className='w-[30%] h-[30%] bg-white text-black text-center space-y-4 p-2 mt-10'>
             {/* <button onClick={()=>{stop.current = false; searchProfile(user._id)}}>{user.firstName} {user.lastName}</button> */}
             <h1>{user.firstName} {user.lastName}</h1>
             <div className='flex items-center space-x-5'><FaLocationDot/><h1>{user.location}</h1></div>

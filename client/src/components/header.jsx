@@ -38,6 +38,13 @@ const Header = () => {
                 }
                 {user !== null && 
                     <li className='hover:text-gray-400 '>
+                        <Link to={"createPost"}>
+                            CREATE
+                        </Link>
+                    </li>
+                }
+                {user !== null && 
+                    <li className='hover:text-gray-400 '>
                         <button onClick={logOut}>
                             LOGOUT
                         </button>
