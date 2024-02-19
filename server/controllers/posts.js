@@ -4,28 +4,32 @@ import User from "../models/User.js";
 // CREATE
 export const createPost = async (req, res) => {
     try {
-        const {userId, description, picturePath} = req.body;
-        const user = await User.findById(userId);
-        const newPost = new Post({
-            userId,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            location: user.location,
-            description,
-            userPicturePath: user.picturePath,
-            picturePath,
-            likes: {},
-            comments: []
-        })
-
-        await newPost.save();
-        // grab all the posts
-        const post = Post.find();
-        res.status(201).json(post);
-    } catch (err){
-        res.status(409).json({message: err.message})
+      console.log(req.body);
+      const { userId, description, picturePath, user } = req.body;
+      console.log("give me this 2: " + userId);
+      // const user = await User.findById(userId);
+      console.log("give me this 3: " + JSON.stringify(user));
+      const newPost = new Post({
+        userId: userId,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        location: user.location,
+        description,
+        userPicturePath: user.picturePath,
+        picturePath,
+        likes: {},
+        comments: [],
+      });
+      console.log("give me this 4");
+      await newPost.save();
+      // grab all the posts
+      const posts = await Post.find();
+      res.status(201).json(posts);
+    } catch (err) {
+      console.log(err);
+      res.status(409).json({ message: err.message });
     }
-}
+  };
 
 // READ
 export const getFeedPosts = async (req, res) => {

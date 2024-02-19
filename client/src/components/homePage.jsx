@@ -82,28 +82,32 @@ const HomePage = () => {
   }
 
   const createPost = async (e) => {
+    if (e.target.postDescription.value !== "") {
+      console.log(user.firstName);
+      const content = e.target.postDescription.value;
       e.preventDefault();
-    if (e.target.postDescription.value !== ""){
-      const formData = new FormData();
-      formData.append("userId", user._id);
-      formData.append("description", e.target.postDescription.value);
-      formData.append("picturePath", "");
-      // if (image) {
-      //   formData.append("picture", image);
-      //   formData.append("picturePath", image.name);
-      // }
-
+      const data = {
+        userId: user._id,
+        description: content,
+        picturePath: "",
+        user: user,
+      };
+  
       const response = await fetch(`http://localhost:3001/posts`, {
         method: "POST",
-        // headers: { Authorization: `Bearer ${token}` },
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       });
+  
       e.target.postDescription.value = "";
-      const posts = await response.json();
+      // const posts = await response.json();
     } else {
+      e.preventDefault();
       console.log("Empty text");
     }
-  }
+  };
 
   let postPosition = 0;
 
