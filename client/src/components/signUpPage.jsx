@@ -7,6 +7,8 @@ import {setLogin} from "../state/index.jsx"
 
 const SignUpPage = () => {
 
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
 
     const form = useRef();
@@ -34,12 +36,12 @@ const SignUpPage = () => {
                 }
             );
             const savedUser = await savedUserResponse.json();
+            console.log("saveduser = " + JSON.stringify(savedUser));
             if (!("error" in savedUser)){
                 navigate("/");
                 dispatch(
                     setLogin({
-                        user: loggedIn.user,
-                        token: loggedIn.token
+                        user: savedUser
                     })
                 )
             } else {

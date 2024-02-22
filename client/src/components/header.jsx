@@ -12,8 +12,6 @@ const Header = () => {
     let user = null;
     try {
         user = useSelector((state) => state.user);
-        console.log("user from header: ");
-        console.log(user);
     } catch (e){
         console.log("error from redux: " + e);
     }

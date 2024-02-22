@@ -1,5 +1,6 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
+import { io } from "../socket/socket.js";
 
 // CREATE
 export const createPost = async (req, res) => {
@@ -89,6 +90,7 @@ export const commentPost = async (req, res) => {
             {comments: currentComments},
             {new: true},
         );
+        io.emit("leaveComment", [id, [...currentComments]]);
         res.status(200).json(updatedPost);
     } catch (err){
         console.log("err: " + err);

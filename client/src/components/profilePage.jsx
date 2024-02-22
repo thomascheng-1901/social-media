@@ -79,7 +79,7 @@ const ProfilePage = () => {
                     </div>
                     <p className=''>{post.description}</p>
                     <img className='rounded-lg' src={PostImage} alt="postImage" />
-                    <CommentSection comments ={post.comments}></CommentSection>
+                    <CommentSection comments ={post.comments} id = {post.id}></CommentSection>
                 </div>
             )
         }
