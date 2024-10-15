@@ -71,7 +71,7 @@ app.get("*", (req,res) => {
 
 //  MONGOOSE SETUP
 const PORT = process.env.PORT || 3001;
-mongoose.connect("mongodb+srv://thomascchun1901:Abc123def0_0@cluster0.toginma.mongodb.net/?retryWrites=true&w=majority",{
+mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(()=>{ 
